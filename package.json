@@ -1,0 +1,51 @@
+{
+  "name": "fcc-books",
+  "version": "1.0.0",
+  "description": "FCC Book Club App",
+  "main": "index.html",
+  "scripts": {
+    "clean": "rm -rf build",
+    "prebuild": "npm run clean",
+    "build": "webpack --colors --progress",
+    "postbuild": "cp index.html build/index.html",
+    "start": "npm run build && webpack-dev-server --colors --progress",
+    "test": "mocha --compilers js:babel-register --require babel-polyfill",
+    "prefirebase": "npm run build",
+    "firebase": "firebase serve"
+  },
+  "keywords": [
+    "fcc"
+  ],
+  "author": "Alpha Shuro",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "6.5.2",
+    "babel-core": "6.9.1",
+    "babel-eslint": "6.0.5",
+    "babel-loader": "6.2.4",
+    "babel-polyfill": "6.9.1",
+    "babel-preset-es2016": "6.0.11",
+    "babel-preset-react": "6.5.0",
+    "babel-preset-stage-0": "6.5.0",
+    "babel-register": "6.9.0",
+    "chai": "3.5.0",
+    "css-loader": "0.23.1",
+    "firebase": "3.0.5",
+    "http-server": "0.9.0",
+    "material-ui": "0.15.1",
+    "mocha": "2.5.3",
+    "node-sass": "3.8.0",
+    "react": "15.1.0",
+    "react-dom": "15.1.0",
+    "react-redux": "4.4.5",
+    "react-tap-event-plugin": "1.0.0",
+    "redux": "3.5.2",
+    "redux-thunk": "2.1.0",
+    "sass-loader": "3.2.1",
+    "sinon": "1.17.4",
+    "style-loader": "0.13.1",
+    "webpack": "1.13.1",
+    "webpack-dev-server": "1.14.1",
+    "whatwg-fetch": "1.0.0"
+  }
+}
