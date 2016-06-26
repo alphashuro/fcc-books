@@ -10,6 +10,7 @@ const store = createStore(
 	initialState,
   compose(
     applyMiddleware(thunk, routerMiddleware(browserHistory)),
+    typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
   )
 );
 
