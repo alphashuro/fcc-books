@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux'
 import * as types from './action-types';
 
 import initialState from './initial-state';
@@ -226,6 +227,7 @@ const booksReducer = combineReducers({
 	auth,
 	books,
 	trades,
+	routing: routerReducer,
 });
 
 export default booksReducer;

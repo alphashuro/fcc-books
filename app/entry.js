@@ -12,7 +12,12 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import App from './components/app';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import App from './containers/app';
+
+// Create an enhanced history that syncs navigation events with the store
+const history = syncHistoryWithStore(browserHistory, store);
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -24,6 +29,9 @@ const container = document.getElementById('app');
 
 render(
 	<Provider store={store}>
-		<App/>
+		<Router history={history}>
+			<Route path="/" component={App}>
+      </Route>
+    </Router>
 	</Provider>
 , container);
