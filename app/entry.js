@@ -17,6 +17,7 @@ import store from './redux/store';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import App from './containers/app';
+import Landing from './components/landing';
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
@@ -33,6 +34,7 @@ render(
 	<Provider store={store}>
 		<Router history={history}>
 			<Route path="/" component={App}>
+				<IndexRoute component={Landing}/>
       </Route>
     </Router>
 	</Provider>
