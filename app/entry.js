@@ -1,12 +1,14 @@
 import firebase from 'firebase';
 import 'firebase/auth';
 
-firebase.initializeApp({
+const firebaseOptions = {
 	apiKey: "AIzaSyBL3PjX2OZYaG9X8kKGChZZc5EBR-3a7sI",
 	authDomain: "fcc-books.firebaseapp.com",
 	databaseURL: "https://fcc-books.firebaseio.com",
 	storageBucket: "fcc-books.appspot.com",
-});
+};
+
+// firebase.initializeApp(firebaseOptions);
 
 import React from 'react';
 import { render } from 'react-dom';
