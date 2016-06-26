@@ -3,7 +3,7 @@ import * as types from './action-types';
 
 import initialState from './initial-state';
 
-function user(state = initialState.auth, action) {
+function auth(state = initialState.auth, action) {
 	switch(action.type) {
 		case types.SIGNIN_REQUEST:
 			return {
@@ -223,7 +223,7 @@ function trades(state = initialState.trades, action) {
 }
 
 const booksReducer = combineReducers({
-	user,
+	auth,
 	books,
 	trades,
 });
