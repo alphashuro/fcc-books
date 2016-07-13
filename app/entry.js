@@ -8,6 +8,10 @@ import App from './containers/app';
 import Landing from './components/landing';
 import Signin from './containers/sign-in';
 import Signup from './containers/sign-up';
+import Settings from './containers/settings';
+
+import MyBooks from './containers/mybooks';
+import AllBooks from './containers/allbooks';
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
@@ -37,6 +41,9 @@ render(
 				<IndexRoute component={Landing}/>
         <Route path="signin" component={Signin}/>
         <Route path="signup" component={Signup}/>
+        <Route path="settings" component={Settings}/>
+        <Route path="mybooks" component={MyBooks}/>
+        <Route path="allbooks" component={AllBooks}/>
       </Route>
     </Router>
 	</Provider>
