@@ -1,22 +1,26 @@
 import React from 'react';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import RaisedButton from 'material-ui/RaisedButton';
+import { push } from 'react-router-redux';
 
-const Nav = ({loggedIn, user, handleSignin, handleSignout}) => {
+const Nav = ({loggedIn, user, handleSignin, handleSignout, dispatch}) => {
 	return (
 		<Toolbar>
 			<ToolbarGroup firstChild={true}>
-				<ToolbarTitle text="Books Galore" />
+				<ToolbarTitle text="Books Galore"/>
+				<RaisedButton label="Home" onClick={() => dispatch(push('/'))}/>
 			</ToolbarGroup>
-			<ToolbarGroup>
+			<ToolbarGroup lastChild={false}>
 				{
 					loggedIn ? (
 						[
-							<RaisedButton label="All Books"></RaisedButton>,
-							<RaisedButton label="My Books"></RaisedButton>,
-							<RaisedButton label="Settings"></RaisedButton>,
-							<ToolbarSeparator/>,
-							<RaisedButton label="Logout"/>
+							<RaisedButton key={1} label="All Books" onClick={() => dispatch(push('/allbooks'))}></RaisedButton>,
+							<RaisedButton key={2} label="My Books" onClick={() => dispatch(push('/mybooks'))}></RaisedButton>,
+							// <ToolbarSeparator key={4}/>,
+							<ToolbarTitle key={5} text={user.email}/>,
+							<RaisedButton key={6} label="Settings" onClick={() => dispatch(push('/settings'))}/>,
+							<ToolbarSeparator key={7}/>,
+							<RaisedButton key={8} label="Logout"/>,
 						]
 					) : (
 						<RaisedButton label='Sign in' onClick={() => handleSignin()}/>
@@ -25,6 +29,6 @@ const Nav = ({loggedIn, user, handleSignin, handleSignout}) => {
 			</ToolbarGroup>
 		</Toolbar>
 	);
-}
+};
 
 export default Nav;

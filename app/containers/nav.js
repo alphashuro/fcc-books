@@ -14,6 +14,7 @@ const NavContainer = connect(
 	dispatch => ({
 		handleSignin: () => dispatch(push('/signin')),
 		handleSignout: () => console.log('logging out'),
+		dispatch,
 	})
 )(Nav);
 
