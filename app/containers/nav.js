@@ -1,6 +1,7 @@
 import {connect} from 'react-redux';
 import Nav from '../components/nav';
 import { push } from 'react-router-redux';
+import signout from '../redux/actions/signout';
 
 const NavContainer = connect(
 	state => {
@@ -13,7 +14,7 @@ const NavContainer = connect(
 	},
 	dispatch => ({
 		handleSignin: () => dispatch(push('/signin')),
-		handleSignout: () => console.log('logging out'),
+		handleSignout: () => dispatch(signout()),
 		dispatch,
 	})
 )(Nav);

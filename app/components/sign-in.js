@@ -25,7 +25,7 @@ const Signin = React.createClass({
 		}
 	},
 	render() {
-		const {handleSignin, handleSignup} = this.props;
+		const {loggedIn, redirect, handleSignin, handleSignup} = this.props;
 
 		return (
 			<div style={styles}>

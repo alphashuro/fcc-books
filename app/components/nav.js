@@ -20,7 +20,7 @@ const Nav = ({loggedIn, user, handleSignin, handleSignout, dispatch}) => {
 							<ToolbarTitle key={5} text={user.email}/>,
 							<RaisedButton key={6} label="Settings" onClick={() => dispatch(push('/settings'))}/>,
 							<ToolbarSeparator key={7}/>,
-							<RaisedButton key={8} label="Logout"/>,
+							<RaisedButton key={8} label="Logout" onClick={() => handleSignout()}/>,
 						]
 					) : (
 						<RaisedButton label='Sign in' onClick={() => handleSignin()}/>

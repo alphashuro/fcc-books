@@ -1,5 +1,6 @@
 import * as types from './types';
 import {API_URL as apiUrl} from '../constants';
+import {push} from 'react-router-redux';
 
 export const signinRequest = () => ({
 	type: types.SIGNIN_REQUEST,
@@ -33,6 +34,7 @@ export const signin = (email, password) => async dispatch => {
 		const {user, token} = await response.json();
 		localStorage.setItem('auth', JSON.stringify({user, token}));
 		dispatch(signinSuccess({user, token}));
+		dispatch(push('/'));
 	} catch (e) {
 		console.error(e);
 		dispatch(signinFailure(e.message || e));
