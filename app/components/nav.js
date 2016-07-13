@@ -7,7 +7,7 @@ const Nav = ({loggedIn, user, handleSignin, handleSignout, dispatch}) => {
 	return (
 		<Toolbar>
 			<ToolbarGroup firstChild={true}>
-				<ToolbarTitle text="Books Galore"/>
+				<ToolbarTitle style={{marginLeft: '15px'}} text="Books Galore"/>
 				<RaisedButton label="Home" onClick={() => dispatch(push('/'))}/>
 			</ToolbarGroup>
 			<ToolbarGroup lastChild={false}>
