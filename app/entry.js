@@ -1,15 +1,3 @@
-import firebase from 'firebase';
-import 'firebase/auth';
-
-const firebaseOptions = {
-	apiKey: "AIzaSyBL3PjX2OZYaG9X8kKGChZZc5EBR-3a7sI",
-	authDomain: "fcc-books.firebaseapp.com",
-	databaseURL: "https://fcc-books.firebaseio.com",
-	storageBucket: "fcc-books.appspot.com",
-};
-
-// firebase.initializeApp(firebaseOptions);
-
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -18,9 +6,21 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import App from './containers/app';
 import Landing from './components/landing';
+import Signin from './containers/sign-in';
+import Signup from './containers/sign-up';
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
+
+import {signinSuccess} from './redux/actions/signin';
+
+const savedAuthString = localStorage.getItem('auth');
+if (savedAuthString) {
+	const {user, token} = JSON.parse(savedAuthString);
+	if (user && token) {
+		store.dispatch(signinSuccess({user, token}));
+	}
+}
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -35,7 +35,10 @@ render(
 		<Router history={history}>
 			<Route path="/" component={App}>
 				<IndexRoute component={Landing}/>
+        <Route path="signin" component={Signin}/>
+        <Route path="signup" component={Signup}/>
       </Route>
     </Router>
 	</Provider>
 , container);
+
