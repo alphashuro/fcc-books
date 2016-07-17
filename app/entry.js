@@ -20,6 +20,19 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
+import {signinSuccess, signoutSuccess} from './redux/actions/signin';
+
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    // User is signed in.
+    if (!store.getState().auth.user) {
+    	store.dispatch(signinSuccess({user}));
+    }	
+  } else {
+    store.dispatch(signoutSuccess());
+  }
+});
+
 const container = document.getElementById('app');
 
 render(
