@@ -38,7 +38,6 @@ export const signup = ({email, password, fullName, city, state}) => async dispat
 	try {
 		const response = await fetch(apiUrl+'/signup', options);
 		const {user, token} = await response.json();
-		localStorage.setItem('auth', JSON.stringify({user, token}));
 		dispatch(signupSuccess(responseData));
 	} catch (e) {
 		console.log(e);

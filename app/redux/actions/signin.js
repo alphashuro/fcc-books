@@ -32,7 +32,6 @@ export const signin = (email, password) => async dispatch => {
 	try {
 		const response = await fetch(apiUrl+'/signin', options);
 		const {user, token} = await response.json();
-		localStorage.setItem('auth', JSON.stringify({user, token}));
 		dispatch(signinSuccess({user, token}));
 		dispatch(push('/'));
 	} catch (e) {

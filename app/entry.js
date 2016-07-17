@@ -16,16 +16,6 @@ import AllBooks from './containers/allbooks';
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
 
-import {signinSuccess} from './redux/actions/signin';
-
-const savedAuthString = localStorage.getItem('auth');
-if (savedAuthString) {
-	const {user, token} = JSON.parse(savedAuthString);
-	if (user && token) {
-		store.dispatch(signinSuccess({user, token}));
-	}
-}
-
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // Needed for onTouchTap

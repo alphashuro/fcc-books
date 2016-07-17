@@ -17,7 +17,6 @@ const signout = () => async dispatch => {
 	dispatch(signoutRequest());
 
 	try {
-		localStorage.removeItem('auth');
 		dispatch(signoutSuccess());
 		dispatch(push('/'));
 	} catch (e) {
