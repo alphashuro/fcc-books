@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import Signin from '../components/sign-in';
-import signin, {signinSuccess} from '../redux/actions/signin';
+import {signinSuccess, signinGoogle} from '../redux/actions/signin';
 import {push} from 'react-router-redux';
 
 const SigninContainer = connect(
@@ -8,8 +8,8 @@ const SigninContainer = connect(
 		loggedIn: !!state.auth.user,
 	}),
 	dispatch => ({
-		handleSignin: (email, password) => {
-			dispatch(signin(email, password));
+		handleSignin: () => {
+			dispatch(signinGoogle());
 		},
 		handleSignup: () => dispatch(push('/signup')),
 		redirect: () => dispatch(push('/')),
