@@ -17,6 +17,8 @@ const signout = () => async dispatch => {
 	dispatch(signoutRequest());
 
 	try {
+		await firebase.auth().signOut();
+
 		dispatch(signoutSuccess());
 		dispatch(push('/'));
 	} catch (e) {
