@@ -7,9 +7,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import App from './containers/app';
 import Landing from './components/landing';
 import Signin from './containers/sign-in';
-import Signup from './containers/sign-up';
 import Settings from './containers/settings';
-
 import MyBooks from './containers/mybooks';
 import AllBooks from './containers/allbooks';
 
@@ -30,7 +28,6 @@ render(
 			<Route path="/" component={App}>
 				<IndexRoute component={Landing}/>
         <Route path="signin" component={Signin}/>
-        <Route path="signup" component={Signup}/>
         <Route path="settings" component={Settings}/>
         <Route path="mybooks" component={MyBooks}/>
         <Route path="allbooks" component={AllBooks}/>
