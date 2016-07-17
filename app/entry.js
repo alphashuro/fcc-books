@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { syncHistoryWithStore, push } from 'react-router-redux';
 import App from './containers/app';
 import Landing from './components/landing';
 import Signin from './containers/sign-in';
@@ -29,7 +29,9 @@ firebase.auth().onAuthStateChanged(user => {
     	store.dispatch(signinSuccess({user}));
     }	
   } else {
-    store.dispatch(signoutSuccess());
+  	if (store.getState().auth.user) {
+    	store.dispatch(signoutSuccess());
+  	}
   }
 });
 

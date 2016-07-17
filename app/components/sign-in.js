@@ -11,9 +11,12 @@ const styles = {
 };
 
 const Signin = React.createClass({
+	componentWillReceiveProps({loggedIn, redirect}) {
+		if (loggedIn) redirect();
+	},
+	
 	render() {
-		const {loggedIn, handleSignin} = this.props;
-
+		const {handleSignin} = this.props;
 		return (
 			<div style={styles}>
 				<h1>Sign in</h1>

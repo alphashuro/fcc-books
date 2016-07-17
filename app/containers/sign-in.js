@@ -11,12 +11,7 @@ const SigninContainer = connect(
 		handleSignin: () => {
 			dispatch(signinGoogle());
 		},
-		handleSignup: () => dispatch(push('/signup')),
 		redirect: () => dispatch(push('/')),
-		savedSignin: ({user, token}) => {
-			dispatch(signinSuccess({user, token}));
-			dispatch(push('/'));
-		},
 	})
 )(Signin);
 
