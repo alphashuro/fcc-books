@@ -30,13 +30,15 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 import {signinSuccess, signoutSuccess} from './redux/actions/signin';
+import {getProfile} from './redux/actions/get-profile';
 
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     // User is signed in.
     if (!store.getState().auth.user) {
     	store.dispatch(signinSuccess({user}));
-    }	
+    	store.dispatch(getProfile());
+    }
   } else {
   	if (store.getState().auth.user) {
     	store.dispatch(signoutSuccess());
