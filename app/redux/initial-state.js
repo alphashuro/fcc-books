@@ -4,11 +4,18 @@ export default {
 		loading: false,
 		error: null,
 	},
+	profile: {
+		name: '',
+		city: '',
+		state: '',
+		error: '',
+		loading: false,
+	},
 	books: {
 		loading: false,
 		all: [],
 		mine: [],
-		error: null
+		error: null,
 	},
 	trades: {
 		loading: false,
