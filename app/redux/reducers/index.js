@@ -3,9 +3,11 @@ import { routerReducer } from 'react-router-redux';
 import auth from './auth';
 import books from './books';
 import trades from './trades';
+import profile from './profile';
 
 const booksReducer = combineReducers({
 	auth,
+	profile,
 	books,
 	trades,
 	routing: routerReducer,
