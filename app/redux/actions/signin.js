@@ -25,4 +25,4 @@ export const signinGoogle = () => async dispatch => {
 		console.error(error);
 		dispatch(signinFailure(error));
 	}
-}
+};
