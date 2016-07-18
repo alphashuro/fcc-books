@@ -1,7 +1,5 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
 
 const styles = {
 	display: 'flex',
