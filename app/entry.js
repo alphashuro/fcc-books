@@ -11,6 +11,15 @@ import Settings from './containers/settings';
 import MyBooks from './containers/mybooks';
 import AllBooks from './containers/allbooks';
 
+// Initialize Firebase
+var config = {
+	apiKey: "AIzaSyBL3PjX2OZYaG9X8kKGChZZc5EBR-3a7sI",
+	authDomain: "fcc-books.firebaseapp.com",
+	databaseURL: "https://fcc-books.firebaseio.com",
+	storageBucket: "",
+};
+firebase.initializeApp(config);
+
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
 
