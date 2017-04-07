@@ -5,6 +5,7 @@ import { Route } from 'react-router';
 
 import App from './App';
 import LandingPage from './LandingPage';
+import SigninPage from './Signin';
 import store from './store';
 import { history } from './store';
 
@@ -13,6 +14,7 @@ const Root = () => (
 		<ConnectedRouter history={history}>
 			<App>
 				<Route exact path="/" component={LandingPage} />
+				<Route path="/signin" component={SigninPage} />
 			</App>
 		</ConnectedRouter>
 	</Provider>
