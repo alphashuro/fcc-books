@@ -1,14 +1,19 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
+import { Route } from 'react-router';
 
 import App from './App';
-import store, { history } from './store';
+import LandingPage from './LandingPage';
+import store from './store';
+import { history } from './store';
 
 const Root = () => (
 	<Provider store={store}>
 		<ConnectedRouter history={history}>
-			<App />
+			<App>
+				<Route exact path="/" component={LandingPage} />
+			</App>
 		</ConnectedRouter>
 	</Provider>
 );
