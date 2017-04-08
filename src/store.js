@@ -2,17 +2,21 @@ import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import thunk from 'redux-thunk';
 import createHistory from 'history/createBrowserHistory';
-import { routerMiddleware } from 'react-router-redux';
+import { routerMiddleware, routerReducer } from 'react-router-redux';
 import userReducer from './Signin/container/reducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const history = createHistory();
+const middleware = [ routerMiddleware(history), thunk ];
 
-export default createStore(
+const store = createStore(
 	combineReducers({
 		form: formReducer,
+		router: routerReducer,
 		user: userReducer,
 	}),
-	composeEnhancers(applyMiddleware(thunk, routerMiddleware(history)))
+	composeEnhancers(applyMiddleware(...middleware))
 );
+
+export default store;

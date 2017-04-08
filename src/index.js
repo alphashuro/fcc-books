@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import Root from './Root';
 
@@ -12,22 +12,22 @@ injectTapEventPlugin();
 import { init } from './api';
 init();
 
-ReactDOM.render(
-	<AppContainer>
-		<Root />
-	</AppContainer>,
-	document.getElementById('root')
-);
+const root = document.getElementById('root');
+
+const renderApp = () =>
+	render(
+		<AppContainer>
+			<Root />
+		</AppContainer>,
+		root
+	);
+
+renderApp();
 
 // Hot Module Replacement API
 if (module.hot) {
 	module.hot.accept('./Root', () => {
-		const NextApp = require('./Root').default;
-		ReactDOM.render(
-			<AppContainer>
-				<NextApp />
-			</AppContainer>,
-			document.getElementById('root')
-		);
+		require('./Root');
+		renderApp();
 	});
 }

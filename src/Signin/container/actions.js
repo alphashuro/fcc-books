@@ -31,7 +31,7 @@ export function listenForSignin() {
 				dispatch(signedIn(user));
 				dispatch(push('/'));
 			} else {
-				dispatch(push('/login'));
+				dispatch(push('/signin'));
 			}
 		});
 }

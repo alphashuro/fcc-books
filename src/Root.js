@@ -1,21 +1,26 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
-import { Route } from 'react-router';
-
-import App from './App';
+import { Route } from 'react-router-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import store, { history } from './store';
+import Nav from './Nav';
 import LandingPage from './LandingPage';
 import SigninPage from './Signin';
-import store from './store';
-import { history } from './store';
+import SettingsPage from './Settings';
 
 const Root = () => (
 	<Provider store={store}>
 		<ConnectedRouter history={history}>
-			<App>
-				<Route exact path="/" component={LandingPage} />
-				<Route path="/signin" component={SigninPage} />
-			</App>
+			<MuiThemeProvider>
+				<div className="app">
+					<Nav />
+
+					<Route exact path="/" component={LandingPage} />
+					<Route path="/signin" component={SigninPage} />
+					<Route path="/settings" component={SettingsPage} />
+				</div>
+			</MuiThemeProvider>
 		</ConnectedRouter>
 	</Provider>
 );
