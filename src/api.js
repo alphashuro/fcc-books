@@ -16,6 +16,7 @@ firebase.initializeApp(config);
 const dbRef = path => firebase.database().ref(path);
 const observeOn = event => obj => Observable.fromEvent(obj, event);
 const setRef = data => ref => ref.set(data);
+const getVal = snapshot => snapshot.val();
 
 /**
  * Emits a `user` object when a user signs in
@@ -39,7 +40,7 @@ export function getProfile() {
 		.map(concat('users/'))
 		.map(dbRef)
 		.flatMap(observeOn('value'))
-		.map(snapshot => snapshot.val());
+		.map(getVal);
 }
 
 export function updateProfile(profile) {
@@ -57,9 +58,50 @@ export const googleSigninSource = Observable.using(
 		Observable.fromPromise(firebase.auth().signInWithPopup(provider))
 );
 
+export function searchBook(text) {
+	const params = new URLSearchParams();
+	params.set('fields', 'kind,items(volumeInfo/title, volumeInfo/imageLinks)');
+	params.set('q', text);
+	const url = 'https://www.googleapis.com/books/v1/volumes?' +
+		params.toString();
+	return fetch(url);
+}
+
+export function addBook(book) {
+	const newBookKey = firebase.database().ref().child('books').push().key;
+	const user = firebase.auth().currentUser;
+
+	if (!user) return;
+
+	const bookData = {
+		...book,
+		userId: user.uid,
+	};
+
+	const updates = {
+		[`/books/${newBookKey}`]: bookData,
+		[`/user-books/${user.uid}/${newBookKey}`]: bookData,
+	};
+
+	return firebase.database().ref().update(updates);
+}
+
+export function getMyBooks() {
+	return authChanged
+		.filter(Boolean)
+		.pluck('uid')
+		.map(concat('user-books/'))
+		.map(dbRef)
+		.flatMap(observeOn('value'))
+		.map(getVal);
+}
+
 export default {
 	googleSigninSource,
 	authChanged,
 	getProfile,
 	updateProfile,
+	searchBook,
+	addBook,
+	getMyBooks,
 };

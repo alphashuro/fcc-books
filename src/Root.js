@@ -8,6 +8,7 @@ import Nav from './Nav';
 import LandingPage from './LandingPage';
 import SigninPage from './Signin';
 import SettingsPage from './Settings';
+import MyBooksPage from './MyBooksPage';
 
 const Root = () => (
 	<Provider store={store}>
@@ -19,6 +20,7 @@ const Root = () => (
 					<Route exact path="/" component={LandingPage} />
 					<Route path="/signin" component={SigninPage} />
 					<Route path="/settings" component={SettingsPage} />
+					<Route path="/mybooks" component={MyBooksPage} />
 				</div>
 			</MuiThemeProvider>
 		</ConnectedRouter>

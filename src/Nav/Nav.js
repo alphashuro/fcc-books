@@ -13,7 +13,7 @@ export default React.createClass({
 	},
 
 	componentWillUnmount() {
-		this.authSubscription.unsubscribe();
+		this.authSubscription && this.authSubscription.unsubscribe();
 	},
 
 	render() {
@@ -22,7 +22,7 @@ export default React.createClass({
 		const LoggedIn = () => (
 			<div style={{ marginTop: 5 }}>
 				<FlatLink to="books" label="All Books" />
-				<FlatButton label="My Books" />
+				<FlatLink to="mybooks" label="My Books" />
 				<FlatLink to="settings" label="Settings" />
 			</div>
 		);
