@@ -5,6 +5,9 @@ function userReducer(state = null, action) {
 		case types.SIGNED_IN:
 			return action.user;
 
+		case types.SIGNED_OUT:
+			return null;
+
 		default:
 			return state;
 	}

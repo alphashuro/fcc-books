@@ -55,6 +55,8 @@ export const googleSigninSource = Observable.using(
 		Observable.fromPromise(firebase.auth().signInWithPopup(provider))
 );
 
+export const signOut = Observable.using(firebase.auth, auth => auth.signOut());
+
 export function searchBook(text) {
 	const params = new URLSearchParams();
 	params.set('fields', 'kind,items(volumeInfo/title, volumeInfo/imageLinks)');
@@ -109,4 +111,5 @@ export default {
 	addBook,
 	getMyBooks,
 	getBooks,
+	signOut,
 };
