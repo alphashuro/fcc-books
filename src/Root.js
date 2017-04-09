@@ -9,6 +9,7 @@ import LandingPage from './LandingPage';
 import SigninPage from './Signin';
 import SettingsPage from './Settings';
 import MyBooksPage from './MyBooksPage';
+import AllBooksPage from './AllBooksPage';
 
 const Root = () => (
 	<Provider store={store}>
@@ -21,6 +22,7 @@ const Root = () => (
 					<Route path="/signin" component={SigninPage} />
 					<Route path="/settings" component={SettingsPage} />
 					<Route path="/mybooks" component={MyBooksPage} />
+					<Route path="/books" component={AllBooksPage} />
 				</div>
 			</MuiThemeProvider>
 		</ConnectedRouter>

@@ -23,12 +23,9 @@ const getVal = snapshot => snapshot.val();
  * Emits null when a user signs out
  * @returns {Observable}
  */
-export const authChanged = Observable.using(
-	() => firebase.auth(),
-	auth =>
-		Observable.create(observer =>
-			auth.onAuthStateChanged(observer.next.bind(observer)))
-);
+export const authChanged = Observable.using(firebase.auth, auth =>
+	Observable.create(observer =>
+		auth.onAuthStateChanged(observer.next.bind(observer))));
 
 /**
  *
@@ -96,6 +93,13 @@ export function getMyBooks() {
 		.map(getVal);
 }
 
+export function getBooks() {
+	return Observable.using(firebase.database, db =>
+		Observable.of(db.ref('/books'))
+			.flatMap(observeOn('value'))
+			.map(getVal));
+}
+
 export default {
 	googleSigninSource,
 	authChanged,
@@ -104,4 +108,5 @@ export default {
 	searchBook,
 	addBook,
 	getMyBooks,
+	getBooks,
 };

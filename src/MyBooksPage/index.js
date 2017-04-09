@@ -12,11 +12,14 @@ export default React.createClass({
 	},
 
 	componentDidMount() {
-		this.booksSubscribtion = api.getMyBooks().subscribe(books => {
-			this.setState({
-				myBooks: books,
+		this.booksSubscribtion = api
+			.getMyBooks()
+			.filter(Boolean)
+			.subscribe(books => {
+				this.setState({
+					myBooks: books,
+				});
 			});
-		});
 	},
 
 	componentWillUnmount() {
