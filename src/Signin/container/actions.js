@@ -1,6 +1,6 @@
-import { authChangedSource, googleSigninSource } from '../../api';
+import { authChanged, googleSigninSource } from '../../api';
 import { push } from 'react-router-redux';
-import store from '../../store';
+import { ifElse, compose } from 'ramda';
 
 export const types = {
 	SIGNED_IN: 'SIGNED_IN',
@@ -14,14 +14,21 @@ export function signedIn(user) {
 }
 
 export function signin() {
-	return dispatch =>
-		googleSigninSource.subscribe(user => {
-			dispatch(signedIn(user));
-			dispatch(push('/'));
-		});
+	return dispatch => {
+		const dispatchSignedIn = compose(dispatch, signedIn);
+		const redirectToRoot = () => dispatch(push('/'));
+
+		googleSigninSource.do(dispatchSignedIn).subscribe(redirectToRoot);
+	};
 }
 
-authChangedSource.subscribe(
-	user =>
-		user ? store.dispatch(signedIn(user)) : store.dispatch(push('/signin'))
-);
+export function listenForAuth() {
+	return dispatch => {
+		const dispatchSignedIn = compose(dispatch, signedIn);
+		const redirectToSignin = () => dispatch(push('/signin'));
+
+		return authChanged.subscribe(
+			ifElse(Boolean, dispatchSignedIn, redirectToSignin)
+		);
+	};
+}

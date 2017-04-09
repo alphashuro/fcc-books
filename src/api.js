@@ -22,7 +22,7 @@ const setRef = data => ref => ref.set(data);
  * Emits null when a user signs out
  * @returns {Observable}
  */
-export const authChangedSource = Observable.using(
+export const authChanged = Observable.using(
 	() => firebase.auth(),
 	auth =>
 		Observable.create(observer =>
@@ -33,7 +33,7 @@ export const authChangedSource = Observable.using(
  *
  */
 export function getProfile() {
-	return authChangedSource
+	return authChanged
 		.filter(Boolean) // ignore logged out users
 		.pluck('uid')
 		.map(concat('users/'))
@@ -43,7 +43,7 @@ export function getProfile() {
 }
 
 export function updateProfile(profile) {
-	return authChangedSource
+	return authChanged
 		.filter(Boolean) // ignore logged out users
 		.pluck('uid')
 		.map(concat('users/'))
@@ -59,7 +59,7 @@ export const googleSigninSource = Observable.using(
 
 export default {
 	googleSigninSource,
-	authChangedSource,
+	authChanged,
 	getProfile,
 	updateProfile,
 };

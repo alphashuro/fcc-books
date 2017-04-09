@@ -1,5 +1,5 @@
 import api from '../../api';
-import { pipe } from 'ramda';
+import { compose } from 'ramda';
 
 export const types = { PROFILE_RECIEVED: 'PROFILE_RECIEVED' };
 
@@ -10,7 +10,7 @@ export const profileRecieved = profile => ({
 
 export const getProfile = userId =>
 	dispatch =>
-		api.getProfile(userId).subscribe(pipe(profileRecieved, dispatch));
+		api.getProfile(userId).subscribe(compose(dispatch, profileRecieved));
 
 export const updateProfile = profile =>
 	() => api.updateProfile(profile).subscribe();
