@@ -3,14 +3,10 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import Root from './Root';
 
-import injectTapEventPlugin from 'react-tap-event-plugin';
-
-// Needed for onTouchTap
+// Needed for material ui onTouchTap
 // http://stackoverflow.com/a/34015469/988941
+import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
-
-import { init } from './api';
-init();
 
 const root = document.getElementById('root');
 
@@ -22,9 +18,10 @@ const renderApp = () =>
 		root
 	);
 
-renderApp();
+renderApp(); // initial render
 
 // Hot Module Replacement API
+// hack away HMR, hack away
 if (module.hot) {
 	module.hot.accept('./Root', () => {
 		require('./Root');

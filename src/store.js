@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware, routerReducer } from 'react-router-redux';
 import userReducer from './Signin/container/reducer';
+import profileReducer from './Settings/container/reducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -15,6 +16,7 @@ const store = createStore(
 		form: formReducer,
 		router: routerReducer,
 		user: userReducer,
+		profile: profileReducer,
 	}),
 	composeEnhancers(applyMiddleware(...middleware))
 );

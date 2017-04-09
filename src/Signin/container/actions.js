@@ -1,6 +1,6 @@
-import * as api from '../../api';
+import { authChangedSource, googleSigninSource } from '../../api';
 import { push } from 'react-router-redux';
-import firebase from 'firebase';
+import store from '../../store';
 
 export const types = {
 	SIGNED_IN: 'SIGNED_IN',
@@ -14,24 +14,14 @@ export function signedIn(user) {
 }
 
 export function signin() {
-	return async dispatch => {
-		try {
-			const { user } = await api.signinWithGoogle();
+	return dispatch =>
+		googleSigninSource.subscribe(user => {
 			dispatch(signedIn(user));
 			dispatch(push('/'));
-		} catch (e) {
-			console.error(e);
-		}
-	};
-}
-
-export function listenForSignin() {
-	return dispatch => firebase.auth().onAuthStateChanged(function(user) {
-			if (user) {
-				dispatch(signedIn(user));
-				dispatch(push('/'));
-			} else {
-				dispatch(push('/signin'));
-			}
 		});
 }
+
+authChangedSource.subscribe(
+	user =>
+		user ? store.dispatch(signedIn(user)) : store.dispatch(push('/signin'))
+);
