@@ -3,8 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 import thunk from 'redux-thunk';
 import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware, routerReducer } from 'react-router-redux';
-import userReducer from './Signin/container/reducer';
-import profileReducer from './Settings/container/reducer';
+import * as reducers from './reducers';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -15,10 +14,17 @@ const store = createStore(
 	combineReducers({
 		form: formReducer,
 		router: routerReducer,
-		user: userReducer,
-		profile: profileReducer,
+		...reducers,
 	}),
 	composeEnhancers(applyMiddleware(...middleware))
 );
+
+if (module.hot) {
+	// Enable Webpack hot module replacement for reducers
+	module.hot.accept('./reducers', () => {
+		const nextRootReducer = require('./reducers');
+		store.replaceReducer(nextRootReducer);
+	});
+}
 
 export default store;
